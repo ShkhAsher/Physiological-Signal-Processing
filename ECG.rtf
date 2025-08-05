@@ -1,0 +1,223 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red245\green245\blue245;\red0\green0\blue0;\red131\green0\blue165;
+\red15\green112\blue1;\red144\green1\blue18;\red86\green65\blue25;\red19\green85\blue52;\red0\green0\blue255;
+\red0\green0\blue109;}
+{\*\expandedcolortbl;;\cssrgb\c96863\c96863\c96863;\cssrgb\c0\c0\c0;\cssrgb\c59216\c13725\c70588;
+\cssrgb\c0\c50196\c0;\cssrgb\c63922\c8235\c8235;\cssrgb\c41569\c32157\c12941;\cssrgb\c6667\c40000\c26667;\cssrgb\c0\c0\c100000;
+\cssrgb\c0\c6275\c50196;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs28 \cf0 \cb2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec3 pip install wfdb\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb2 \strokec4 import\cf0 \cb2 \strokec3  numpy \cf4 \cb2 \strokec4 as\cf0 \cb2 \strokec3  np\cb1 \
+\cf4 \cb2 \strokec4 import\cf0 \cb2 \strokec3  wfdb\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb2 \strokec5 # Read a sample ECG recording from the MIT-BIH Arrhythmia Database\cf0 \cb1 \strokec3 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb2 record = wfdb.rdrecord(\cf6 \cb2 \strokec6 '108'\cf0 \cb2 \strokec3 , pn_dir=\cf6 \cb2 \strokec6 'mitdb'\cf0 \cb2 \strokec3 )\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb2 \strokec5 # Display the signal shape\cf0 \cb1 \strokec3 \
+\pard\pardeftab720\partightenfactor0
+\cf7 \cb2 \strokec7 print\cf0 \cb2 \strokec3 (record.p_signal.shape)\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb2 \strokec5 # Plot the ECG\cf0 \cb1 \strokec3 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb2 wfdb.plot_wfdb(record=record, title=\cf6 \cb2 \strokec6 'MIT-BIH Record 100'\cf0 \cb2 \strokec3 )\cb1 \
+\
+\cb2 record.sig_name\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf7 \cb2 \strokec7 print\cf0 \cb2 \strokec3 (record.p_signal.shape)\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb2 display(signal)\cb1 \
+\cb2 display(fields)\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb2 \strokec5 #signal, fields = wfdb.rdsamp('100', channels=[0],sampfrom=0, sampto=1000, pn_dir='mitdb')\cf0 \cb1 \strokec3 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb2 signal, fields = wfdb.rdsamp(\cf6 \cb2 \strokec6 '108'\cf0 \cb2 \strokec3 , channels=[\cf8 \cb2 \strokec8 1\cf0 \cb2 \strokec3 ], pn_dir=\cf6 \cb2 \strokec6 'mitdb'\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 signal = signal.flatten()\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf7 \cb2 \strokec7 print\cf0 \cb2 \strokec3 (signal.shape)\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb2 display(signal)\cb1 \
+\cb2 display(fields)\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb2 \strokec4 import\cf0 \cb2 \strokec3  scipy.io\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb2 scipy.io.savemat(\cf6 \cb2 \strokec6 '/content/signal.mat'\cf0 \cb2 \strokec3 , \{\cf6 \cb2 \strokec6 'signal'\cf0 \cb2 \strokec3 : signal\})\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb2 \strokec5 # Demo 5 - Read a WFDB record and annotation. Plot all channels, and the annotation on top of channel 0.\cf0 \cb1 \strokec3 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb2 fs=fields[\cf6 \cb2 \strokec6 'fs'\cf0 \cb2 \strokec3 ]\cb1 \
+\cb2 time = np.arange(\cf7 \cb2 \strokec7 len\cf0 \cb2 \strokec3 (signal)) / fs\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf7 \cb2 \strokec7 print\cf0 \cb2 \strokec3 (fs)\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb2 \strokec5 #ann=wfdb.rdann('108','atr',sampfrom=0, sampto=1000, pn_dir='mitdb')\cf0 \cb1 \strokec3 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb2 ann=wfdb.rdann(\cf6 \cb2 \strokec6 '108'\cf0 \cb2 \strokec3 ,\cf6 \cb2 \strokec6 'atr'\cf0 \cb2 \strokec3 , pn_dir=\cf6 \cb2 \strokec6 'mitdb'\cf0 \cb2 \strokec3 )\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf7 \cb2 \strokec7 print\cf0 \cb2 \strokec3 (ann)\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb2 scipy.io.savemat(\cf6 \cb2 \strokec6 '/content/ann.mat'\cf0 \cb2 \strokec3 , \{\cf6 \cb2 \strokec6 'ann'\cf0 \cb2 \strokec3 : ann\})\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb2 \strokec4 import\cf0 \cb2 \strokec3  matplotlib.pyplot \cf4 \cb2 \strokec4 as\cf0 \cb2 \strokec3  plt\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb2 plt.figure(figsize=(\cf8 \cb2 \strokec8 12\cf0 \cb2 \strokec3 , \cf8 \cb2 \strokec8 4\cf0 \cb2 \strokec3 ))\cb1 \
+\cb2 plt.plot(time, signal, color=\cf6 \cb2 \strokec6 'blue'\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.plot(ann.sample/fs,signal[ann.sample],\cf6 \cb2 \strokec6 'ro'\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.title(\cf6 \cb2 \strokec6 'Channel 0 - Record 100 (MIT-BIH)'\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.xlabel(\cf6 \cb2 \strokec6 'Time (s)'\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.ylabel(\cf6 \cb2 \strokec6 'Amplitude (mV)'\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.grid(\cf9 \cb2 \strokec9 True\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.tight_layout()\cb1 \
+\cb2 plt.show()\
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb2 \strokec4 from\cf0 \cb2 \strokec3  scipy.signal \cf4 \cb2 \strokec4 import\cf0 \cb2 \strokec3  butter\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb2 \strokec5 #b, a = butter(N=2, Wn=0.33, btype='low', analog=False)  # fc=60Hz wn=fc/fs/2\cf0 \cb1 \strokec3 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb2 b, a = butter(N=\cf8 \cb2 \strokec8 2\cf0 \cb2 \strokec3 , Wn=\cf8 \cb2 \strokec8 0.22\cf0 \cb2 \strokec3 , btype=\cf6 \cb2 \strokec6 'low'\cf0 \cb2 \strokec3 , analog=\cf9 \cb2 \strokec9 False\cf0 \cb2 \strokec3 )  \cf5 \cb2 \strokec5 # fc=40Hz wn=fc/fs/2\cf0 \cb1 \strokec3 \
+\pard\pardeftab720\partightenfactor0
+\cf7 \cb2 \strokec7 print\cf0 \cb2 \strokec3 (a)\
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb2 \strokec4 from\cf0 \cb2 \strokec3  scipy.signal \cf4 \cb2 \strokec4 import\cf0 \cb2 \strokec3  iirnotch, filtfilt\cb1 \
+\
+\cb2 fs = \cf8 \cb2 \strokec8 360\cf0 \cb2 \strokec3         \cf5 \cb2 \strokec5 # Sampling frequency (MITDB)\cf0 \cb1 \strokec3 \
+\cb2 f0 = \cf8 \cb2 \strokec8 60\cf0 \cb2 \strokec3           \cf5 \cb2 \strokec5 # Frequency to remove\cf0 \cb1 \strokec3 \
+\cb2 Q = \cf8 \cb2 \strokec8 30\cf0 \cb2 \strokec3            \cf5 \cb2 \strokec5 # Quality factor (higher = narrower notch)\cf0 \cb1 \strokec3 \
+\
+\cf5 \cb2 \strokec5 # Design notch filter\cf0 \cb1 \strokec3 \
+\cb2 wo = f0 / (fs/\cf8 \cb2 \strokec8 2\cf0 \cb2 \strokec3 )         \cf5 \cb2 \strokec5 # Normalized frequency\cf0 \cb1 \strokec3 \
+\cb2 bw = wo / Q              \cf5 \cb2 \strokec5 # Bandwidth\cf0 \cb1 \strokec3 \
+\cb2 [b, a] = iirnotch(wo, bw)\cb1 \
+\
+\cf5 \cb2 \strokec5 # Apply the filter\cf0 \cb1 \strokec3 \
+\cb2 filtered = filtfilt(b, a, signal)  \cf5 \cb2 \strokec5 # Use filtfilt for zero-phase\cf0 \cb1 \strokec3 \
+\
+\cf5 \cb2 \strokec5 # Optional: plot before and after\cf0 \cb1 \strokec3 \
+\cb2 plt.figure(figsize=(\cf8 \cb2 \strokec8 12\cf0 \cb2 \strokec3 , \cf8 \cb2 \strokec8 5\cf0 \cb2 \strokec3 ))\cb1 \
+\cb2 plt.subplot(\cf8 \cb2 \strokec8 2\cf0 \cb2 \strokec3 , \cf8 \cb2 \strokec8 1\cf0 \cb2 \strokec3 , \cf8 \cb2 \strokec8 1\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.plot(signal, label=\cf6 \cb2 \strokec6 'Original Signal'\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.title(\cf6 \cb2 \strokec6 'Before Notch Filter'\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.subplot(\cf8 \cb2 \strokec8 2\cf0 \cb2 \strokec3 , \cf8 \cb2 \strokec8 1\cf0 \cb2 \strokec3 , \cf8 \cb2 \strokec8 2\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.plot(filtered, label=\cf6 \cb2 \strokec6 'Filtered Signal'\cf0 \cb2 \strokec3 , color=\cf6 \cb2 \strokec6 'orange'\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.title(\cf6 \cb2 \strokec6 'After Notch Filter (60 Hz Removed)'\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.tight_layout()\cb1 \
+\cb2 plt.show()\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb2 \strokec4 from\cf0 \cb2 \strokec3  scipy.signal \cf4 \cb2 \strokec4 import\cf0 \cb2 \strokec3  lfilter\cb1 \
+\
+\cb2 filtered = lfilter(b, a, signal)\cb1 \
+\
+\cb2 plt.figure(figsize=(\cf8 \cb2 \strokec8 12\cf0 \cb2 \strokec3 , \cf8 \cb2 \strokec8 4\cf0 \cb2 \strokec3 ))\cb1 \
+\cb2 plt.plot(time, filtered, color=\cf6 \cb2 \strokec6 'blue'\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.plot(ann.sample/fs,filtered[ann.sample],\cf6 \cb2 \strokec6 'ro'\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.plot(time, signal, color=\cf6 \cb2 \strokec6 'red'\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.title(\cf6 \cb2 \strokec6 'Channel 0 - Record 108 (MIT-BIH)'\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.xlabel(\cf6 \cb2 \strokec6 'Time (s)'\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.ylabel(\cf6 \cb2 \strokec6 'Amplitude (mV)'\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.xlim(\cf8 \cb2 \strokec8 0\cf0 \cb2 \strokec3 ,\cf8 \cb2 \strokec8 50\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.grid(\cf9 \cb2 \strokec9 True\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.tight_layout()\cb1 \
+\cb2 plt.show()\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb2 \strokec4 import\cf0 \cb2 \strokec3  numpy \cf4 \cb2 \strokec4 as\cf0 \cb2 \strokec3  np\cb1 \
+\cb2 T = \cf8 \cb2 \strokec8 1\cf0 \cb2 \strokec3  / fs  \cf5 \cb2 \strokec5 # Sampling interval\cf0 \cb1 \strokec3 \
+\cb2 n = \cf7 \cb2 \strokec7 len\cf0 \cb2 \strokec3 (signal)\cb1 \
+\cb2 fft_vals = np.fft.fft(signal)\cb1 \
+\cb2 fft_vals = np.\cf7 \cb2 \strokec7 abs\cf0 \cb2 \strokec3 (fft_vals[:n // \cf8 \cb2 \strokec8 2\cf0 \cb2 \strokec3 ])  \cf5 \cb2 \strokec5 # Magnitude only, half-spectrum\cf0 \cb1 \strokec3 \
+\cb2 freqs = np.fft.fftfreq(n, T)[:n // \cf8 \cb2 \strokec8 2\cf0 \cb2 \strokec3 ]  \cf5 \cb2 \strokec5 # Frequency bins\cf0 \cb1 \strokec3 \
+\
+\
+\
+\cf5 \cb2 \strokec5 # Plot positive frequencies only\cf0 \cb1 \strokec3 \
+\cb2 plt.figure(figsize=(\cf8 \cb2 \strokec8 12\cf0 \cb2 \strokec3 , \cf8 \cb2 \strokec8 4\cf0 \cb2 \strokec3 ))\cb1 \
+\cb2 plt.plot(freqs, fft_vals)\cb1 \
+\cb2 plt.title(\cf6 \cb2 \strokec6 "Frequency Response (FFT of ECG Signal)"\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.xlabel(\cf6 \cb2 \strokec6 "Frequency (Hz)"\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.ylabel(\cf6 \cb2 \strokec6 "Magnitude"\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.xlim(\cf8 \cb2 \strokec8 55\cf0 \cb2 \strokec3 ,\cf8 \cb2 \strokec8 65\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.ylim(\cf8 \cb2 \strokec8 0\cf0 \cb2 \strokec3 ,\cf8 \cb2 \strokec8 1300\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.grid(\cf9 \cb2 \strokec9 True\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.show()\cb1 \
+\
+\cb2 fft_filt = np.fft.fft(filtered)\cb1 \
+\cb2 fft_filt = np.\cf7 \cb2 \strokec7 abs\cf0 \cb2 \strokec3 (fft_filt[:n // \cf8 \cb2 \strokec8 2\cf0 \cb2 \strokec3 ])  \cf5 \cb2 \strokec5 # Magnitude only, half-spectrum\cf0 \cb1 \strokec3 \
+\cb2 freqs = np.fft.fftfreq(n, T)[:n // \cf8 \cb2 \strokec8 2\cf0 \cb2 \strokec3 ]  \cf5 \cb2 \strokec5 # Frequency bins\cf0 \cb1 \strokec3 \
+\
+\
+\
+\cf5 \cb2 \strokec5 # Plot positive frequencies only\cf0 \cb1 \strokec3 \
+\cb2 plt.figure(figsize=(\cf8 \cb2 \strokec8 12\cf0 \cb2 \strokec3 , \cf8 \cb2 \strokec8 4\cf0 \cb2 \strokec3 ))\cb1 \
+\cb2 plt.plot(freqs, fft_filt, color=\cf6 \cb2 \strokec6 'green'\cf0 \cb2 \strokec3 )\cb1 \
+\cf5 \cb2 \strokec5 #plt.plot(freqs, fft_vals,color='red')\cf0 \cb1 \strokec3 \
+\cb2 plt.title(\cf6 \cb2 \strokec6 "Frequency Response (FFT of ECG Signal)"\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.xlabel(\cf6 \cb2 \strokec6 "Frequency (Hz)"\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.ylabel(\cf6 \cb2 \strokec6 "Magnitude"\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.xlim(\cf8 \cb2 \strokec8 0\cf0 \cb2 \strokec3 , \cf8 \cb2 \strokec8 65\cf0 \cb2 \strokec3 )  \cf5 \cb2 \strokec5 # Zoom into 0 to 100 Hz\cf0 \cb1 \strokec3 \
+\
+\
+\cb2 plt.grid(\cf9 \cb2 \strokec9 True\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.show()\cb1 \
+\
+\cf4 \cb2 \strokec4 from\cf0 \cb2 \strokec3  scipy.signal \cf4 \cb2 \strokec4 import\cf0 \cb2 \strokec3  butter\cb1 \
+\cf4 \cb2 \strokec4 from\cf0 \cb2 \strokec3  scipy.signal \cf4 \cb2 \strokec4 import\cf0 \cb2 \strokec3  iirnotch, filtfilt\cb1 \
+\cf4 \cb2 \strokec4 import\cf0 \cb2 \strokec3  matplotlib.pyplot \cf4 \cb2 \strokec4 as\cf0 \cb2 \strokec3  plt\cb1 \
+\cf4 \cb2 \strokec4 for\cf0 \cb2 \strokec3  i \cf9 \cb2 \strokec9 in\cf0 \cb2 \strokec3  \cf7 \cb2 \strokec7 range\cf0 \cb2 \strokec3 (\cf8 \cb2 \strokec8 0\cf0 \cb2 \strokec3 ,\cf8 \cb2 \strokec8 65000\cf0 \cb2 \strokec3 , \cf8 \cb2 \strokec8 1000\cf0 \cb2 \strokec3 ):\cb1 \
+\cb2   signal, fields = wfdb.rdsamp(\cf6 \cb2 \strokec6 '108'\cf0 \cb2 \strokec3 , channels=[\cf8 \cb2 \strokec8 0\cf0 \cb2 \strokec3 ], sampfrom=i, sampto=i+\cf8 \cb2 \strokec8 1000\cf0 \cb2 \strokec3 ,pn_dir=\cf6 \cb2 \strokec6 'mitdb'\cf0 \cb2 \strokec3 )\cb1 \
+\cb2   signal = signal.flatten()\cb1 \
+\cb2   fs=fields[\cf6 \cb2 \strokec6 'fs'\cf0 \cb2 \strokec3 ]\cb1 \
+\cb2   time = np.arange(\cf7 \cb2 \strokec7 len\cf0 \cb2 \strokec3 (signal)) / fs\cb1 \
+\cb2   filtered=signal_process(signal,fs)\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf7 \cb2 \strokec7 print\cf0 \cb2 \strokec3 (i)\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb2 plt.figure(figsize=(\cf8 \cb2 \strokec8 12\cf0 \cb2 \strokec3 , \cf8 \cb2 \strokec8 4\cf0 \cb2 \strokec3 ))\cb1 \
+\cb2 plt.plot(time, filtered, color=\cf6 \cb2 \strokec6 'blue'\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.plot(time, signal, color=\cf6 \cb2 \strokec6 'red'\cf0 \cb2 \strokec3 )\cb1 \
+\
+\cb2 plt.title(\cf6 \cb2 \strokec6 'Channel 0 - Record 108 (MIT-BIH)'\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.xlabel(\cf6 \cb2 \strokec6 'Time (s)'\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.ylabel(\cf6 \cb2 \strokec6 'Amplitude (mV)'\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.grid(\cf9 \cb2 \strokec9 True\cf0 \cb2 \strokec3 )\cb1 \
+\cb2 plt.tight_layout()\cb1 \
+\cb2 plt.show()\cb1 \
+\
+\
+\pard\pardeftab720\partightenfactor0
+\cf9 \cb2 \strokec9 def\cf0 \cb2 \strokec3  \cf7 \cb2 \strokec7 signal_process\cf0 \cb2 \strokec3  (\cf10 \cb2 \strokec10 sig\cf0 \cb2 \strokec3 , \cf10 \cb2 \strokec10 fs\cf0 \cb2 \strokec3 ,):\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb2   low=\cf8 \cb2 \strokec8 0.5\cf0 \cb2 \strokec3 /(\cf8 \cb2 \strokec8 0.5\cf0 \cb2 \strokec3 *fs)\cb1 \
+\cb2   high=\cf8 \cb2 \strokec8 40\cf0 \cb2 \strokec3 /(\cf8 \cb2 \strokec8 0.5\cf0 \cb2 \strokec3 *fs)\cb1 \
+\cb2   b, a = butter(\cf8 \cb2 \strokec8 4\cf0 \cb2 \strokec3 , [low, high], btype=\cf6 \cb2 \strokec6 'band'\cf0 \cb2 \strokec3 , analog=\cf9 \cb2 \strokec9 False\cf0 \cb2 \strokec3 )\cb1 \
+\cb2   filt = filtfilt(b, a, signal)  \cf5 \cb2 \strokec5 # Use filtfilt for zero-phase\cf0 \cb1 \strokec3 \
+\cb2   \cf4 \cb2 \strokec4 return\cf0 \cb2 \strokec3  filt\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \
+\
+\
+}
